@@ -1,0 +1,39 @@
+.hamburger-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;       /* 画面全体 */
+    height: 100vh;      /* 画面全体 */
+    background-color: rgba(0, 0, 0, 0.5);  /* 半透明の黒い背景 */
+    display: flex;
+    justify-content: flex-start;  /* メニューは左からスライド */
+    align-items: stretch;
+    z-index: 10000;
+    overflow-y: auto;   /* メニュー内スクロール可能に */
+  }
+  
+  .hamburger-menu {
+    background: #fff;
+    width: 100vw;      /* 横幅は固定 or 好きな幅 */
+    height: 100vh;     /* 画面全体の高さ */
+    padding: 5%;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+    overflow-y: auto;  /* 中身が長くなってもスクロール可能 */
+    position: relative;
+  }
+  .hamburger-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    line-height: 1;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #333;  
+    // ▼ 当たり判定を拡大
+    padding: 1rem;
+    margin: -1rem;
+  }
+  
+  

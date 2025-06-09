@@ -1,0 +1,102 @@
+.route-input {
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  
+  .route-input__title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .route-input__block {
+    margin-bottom: 1.2rem;
+  }
+  
+  .route-input__label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.4rem;
+  }
+  
+  .route-input__row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  
+  .route-input__input {
+    flex: 1;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+  }
+  
+  .route-input__stay-time {
+    width: 100px;
+    padding: 0.6rem;
+  }
+
+  .duration-div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+    
+    span{
+      position: absolute;
+      right: 10px;
+      font-size: 15px;
+    }
+  }
+  
+  .route-input__remove-btn {
+    padding: 0.6rem 1rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+  }
+  
+  .route-input__add-btn {
+    display: block;
+    margin: 1rem 0;
+    padding: 0.8rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .route-input__time {
+    margin: 1.5rem 0;
+  }
+  
+  .route-input__timepicker {
+    margin-top: 0.4rem;
+  }
+  
+  .route-input__error {
+    color: #e74c3c;
+    font-weight: bold;
+    margin: 1rem 0;
+    text-align: center;
+  }
+  
+  .route-input__submit {
+    padding: 1rem;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.1rem;
+  }
+  

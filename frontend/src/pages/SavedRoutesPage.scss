@@ -1,0 +1,70 @@
+.saved-routes-container {
+    margin: 16px;
+    position: relative;
+  }
+  
+  .saved-route-card {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    position: relative;
+  }
+  
+  .saved-route-card .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .route-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
+    max-width: 80%;
+  }
+  
+  .badge {
+    padding: 2px 8px;
+    margin-left: 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: white;
+  }
+  
+  .badge-cheapest {
+    background-color: #00b894;
+  }
+  
+  .badge-optimal {
+    background-color: #0984e3;
+  }
+  
+  .delete-button {
+    margin-left: 8px;
+    font-size: 16px;
+    border: none;
+    background: transparent;
+    color: #d63031;
+    cursor: pointer;
+  }
+  
+  .button-wrap {
+    text-align: center;
+    margin-top: 24px;
+  }
+  
+  .reload-button {
+    background-color: #2d3436;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  

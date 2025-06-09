@@ -1,0 +1,107 @@
+.route-detail-container {
+    width: 100%;
+    background-color: #fff;
+    padding: 16px;
+    margin: 30px 0 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+    color: #333;
+  
+    // Planタイトル色
+    .route-detail-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+  
+    // 共通スタイル
+    .map-placeholder {
+      width: 100%;
+      height: 160px;
+      background-color: #f0f0f0;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #999;
+      font-size: 1rem;
+      margin-bottom: 24px;
+    }
+  
+    .segments-list {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      gap: 24px;
+      padding: 5% 0;
+    }
+  
+    .segment-item {
+      position: relative;
+      padding-left: 90px;
+      font-size: 0.875rem;
+      color: #444;
+    }
+  
+    .departure-time,
+    .arrival-time {
+      position: absolute;
+      width: 70px;
+      font-size: 0.75rem;
+      color: #999;
+      text-align: right;
+      user-select: none;
+      line-height: 1.5;
+    }
+  
+    .departure-time { top: 0; left: 0; }
+    .arrival-time { bottom: 6px; left: 0; }
+  
+    .segments-right {
+      padding-left: 15px;
+      border-left: 4px solid #ccc;
+    }
+  
+    .segment-from { font-weight: 600; margin-bottom: 6px; }
+  
+    .segment-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      color: #555;
+    }
+  
+    .segment-icon { font-size: 1.1rem; }
+    .segment-text { flex-grow: 1; }
+    .segment-price { font-size: 0.75rem; color: #666; }
+    .segment-to { font-size: 0.75rem; color: #999; margin-bottom: 6px; }
+    .segment-stay { 
+      margin: auto;
+      font-size: 0.75rem; color: #bbb; 
+      color: #bbb;
+      background: linear-gradient(transparent 60%, #ff6 60%);
+    }
+  
+    .route-summary {
+      padding-top: 16px;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      color: #555;
+      font-size: 0.875rem;
+    }
+  
+    // 色テーマ切り替え
+    &.cheapest {
+      .route-detail-title { color: #3b82f6; }
+      .segments-right { border-left-color: #3b82f6; }
+    }
+  
+    &.optimal {
+      .route-detail-title { color: #10b981; }
+      .segments-right { border-left-color: #10b981; }
+    }
+  }
+  

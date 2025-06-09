@@ -1,0 +1,13 @@
+# フロントエンドの無視対象
+/frontend/node_modules/
+frontend/.vscode/
+
+# バックエンドの無視対象
+/backend/__pycache__/
+/backend/routes/__pycache__/
+/backend/services/__pycache__/
+/backend/node_modules/
+/backend/venv/
+/backend/__init___.py/
+backend/.env/
+/backend/.mypy_cache/
