@@ -38,5 +38,7 @@
     "login": "ログイン",
     "firstName": "名",
     "familyName": "姓",
-    "loginError": "名前が一致しません"
+    "loginError": "名前が一致しません",
+    "error_input_origin_destination": "出発地と目的地を入力してください",
+    "error_route_search": "ルート検索に失敗しました"
 }

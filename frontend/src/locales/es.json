@@ -38,5 +38,7 @@
   "login": "Iniciar sesión",
   "firstName": "Nombre",
   "familyName": "Apellido",
-  "loginError": "El nombre no coincide!"
+  "loginError": "El nombre no coincide!",
+  "error_input_origin_destination": "Por favor, introduce el origen y el destino.",
+  "error_route_search": "Error al buscar la ruta."
 }

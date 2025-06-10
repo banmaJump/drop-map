@@ -8,6 +8,7 @@ import type { RouteRequest, RouteData, RouteResult } from '../types/route';
 import { useTranslation } from 'react-i18next';
 
 import './RouteInputPage.scss';
+import SearchingOverlay from '../components/SearchingOverlay';
 
 const RouteInputPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const RouteInputPage: React.FC = () => {
   const [points, setPoints] = useState<string[]>(['', '']);
   const [departureTime, setDepartureTime] = useState('12:00');
   const [stayTimes, setStayTimes] = useState<string[]>(['']);
+  const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState('');
   const { t } = useTranslation();
 
@@ -58,7 +60,7 @@ const RouteInputPage: React.FC = () => {
     const filteredPoints = trimmedPoints.filter(p => p !== '');
 
     if (filteredPoints.length < 2) {
-      setError('出発地と目的地を入力してください');
+      setError(t('error_input_origin_destination'));
       return;
     }
 
@@ -89,81 +91,97 @@ const RouteInputPage: React.FC = () => {
       stayTimes: stayList,
     };
 
-    const result: RouteResult = await searchRoute(reqData);
-    console.log('reqData sent to API:', reqData);
+    setIsSearching(true);
 
-    navigate('/result', { state: { routeQuery: reqData, routeResult: result } });
+    try {
+      const result: RouteResult = await searchRoute(reqData);
+      console.log('reqData sent to API:', reqData);
+
+      navigate('/result', {
+        state: {
+          routeQuery: reqData,
+          routeResult: result,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      setError(t('error_route_search'));
+      setIsSearching(false);
+    }
   };
 
   return (
-    <div className="route-input">
-      <h1 className="route-input__title">{t('route_input')}</h1>
+    <>
+      {isSearching && <SearchingOverlay />}
+      <div className="route-input">
+        <h1 className="route-input__title">{t('route_input')}</h1>
 
-      {points.map((point, index) => (
-        <div key={index} className="route-input__block">
-          <label className="route-input__label">
-            {index === 0
-              ? t('departure')
-              : index === points.length - 1
-                ? t('destination')
-                : t('waypoint', { index })}
-          </label>
+        {points.map((point, index) => (
+          <div key={index} className="route-input__block">
+            <label className="route-input__label">
+              {index === 0
+                ? t('departure')
+                : index === points.length - 1
+                  ? t('destination')
+                  : t('waypoint', { index })}
+            </label>
 
-          <div className="route-input__row">
-            <input
-              type="text"
-              value={point}
-              onChange={(e) => handlePointChange(index, e.target.value)}
-              placeholder={
-                index === 0
-                  ? t('departure')
-                  : index === points.length - 1
-                    ? t('destination')
-                    : t('waypoint', { index })
-              }
-              className="route-input__input"
-            />
+            <div className="route-input__row">
+              <input
+                type="text"
+                value={point}
+                onChange={(e) => handlePointChange(index, e.target.value)}
+                placeholder={
+                  index === 0
+                    ? t('departure')
+                    : index === points.length - 1
+                      ? t('destination')
+                      : t('waypoint', { index })
+                }
+                className="route-input__input"
+              />
 
-            {index !== 0 && index !== points.length - 1 && (
-              <>
-                <div className='duration-div'>
-                  <input
-                    type="number"
-                    min="0"
-                    value={stayTimes[index - 1] || ''}
-                    onChange={(e) => handleStayTimeChange(index - 1, e.target.value)}
-                    placeholder={t('stay_minutes')}
-                    className="route-input__stay-time"
-                  />
-                  <span className="route-input__unit">{t('minutes')}</span>
-                </div>
-                <button
-                  onClick={() => removeWaypoint(index)}
-                  className="route-input__remove-btn"
-                >
-                  {t('delete')}
-                </button>
-              </>
-            )}
+              {index !== 0 && index !== points.length - 1 && (
+                <>
+                  <div className='duration-div'>
+                    <input
+                      type="number"
+                      min="0"
+                      value={stayTimes[index - 1] || ''}
+                      onChange={(e) => handleStayTimeChange(index - 1, e.target.value)}
+                      placeholder={t('stay_minutes')}
+                      className="route-input__stay-time"
+                    />
+                    <span className="route-input__unit">{t('minutes')}</span>
+                  </div>
+                  <button
+                    onClick={() => removeWaypoint(index)}
+                    className="route-input__remove-btn"
+                  >
+                    {t('delete')}
+                  </button>
+                </>
+              )}
+            </div>
           </div>
+        ))}
+
+        <button onClick={addWaypoint} className="route-input__add-btn">
+          {t('add_waypoint')}
+        </button>
+
+        <div className="route-input__time">
+          <label className="route-input__label">{t('departure_time')}</label>
+          <TimePicker onChange={setDepartureTime} value={departureTime} className="route-input__timepicker" />
         </div>
-      ))}
 
-      <button onClick={addWaypoint} className="route-input__add-btn">
-        {t('add_waypoint')}
-      </button>
+        {error && <div className="route-input__error">{t('error')}</div>}
 
-      <div className="route-input__time">
-        <label className="route-input__label">{t('departure_time')}</label>
-        <TimePicker onChange={setDepartureTime} value={departureTime} className="route-input__timepicker" />
+        <button onClick={handleSubmit} className="route-input__submit">
+          {t('search')}
+        </button>
       </div>
-
-      {error && <div className="route-input__error">{t('error')}</div>}
-
-      <button onClick={handleSubmit} className="route-input__submit">
-        {t('search')}
-      </button>
-    </div>
+    </>
   );
 };
 
