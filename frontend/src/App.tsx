@@ -19,7 +19,7 @@ import './i18n';
 import type { SavedRoute } from './types/route';
 import { getSavedRoutes } from './api/cacheApi';
 
-const AUTO_LOGOUT_TIME = 1 * 60 * 1000; // 30分でログアウト
+const AUTO_LOGOUT_TIME = 30 * 60 * 1000; // 30分でログアウト
 
 const App: React.FC = () => {
   const [savedRoutes, setSavedRoutes] = useState<SavedRoute[]>([]);
