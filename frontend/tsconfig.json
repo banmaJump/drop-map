@@ -8,7 +8,8 @@
     "target": "ES6",
     "module": "ESNext",
     "jsx": "react-jsx",
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["vite/client"]
   }
 }
 

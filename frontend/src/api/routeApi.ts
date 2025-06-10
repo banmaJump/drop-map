@@ -1,6 +1,7 @@
 // frontend/src/api/routeApi.ts
 import axios from 'axios';
 import type { RouteRequest, RouteResult, RouteDataWithTime, RouteSegment, TransportMode } from '../types/route';
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL || '';
 
 // バックエンドAPIレスポンスの型定義
 interface ApiSegment {
@@ -122,7 +123,7 @@ export async function searchRoute(routeRequest: RouteRequest): Promise<RouteResu
   }
 
   try {
-    const response = await axios.post<ApiResponse>('/api/search_route', payload, {
+    const response = await axios.post<ApiResponse>(`${BACKEND_BASE_URL}/search_route`, payload, {
       headers: { 'Content-Type': 'application/json' },
     });
     // 受け取ったAPIレスポンスをRouteResult型に変換して返す
