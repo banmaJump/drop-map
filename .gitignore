@@ -1,4 +1,4 @@
-.env/
+/.env/
 # フロントエンドの無視対象
 /frontend/node_modules/
 frontend/.vscode/
