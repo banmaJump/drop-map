@@ -15,7 +15,7 @@ class RouteRequest(BaseModel):
     stayTimes: Optional[List[int]] = Field(None, alias="stay_times")
 
     class Config:
-        allow_population_by_field_name = True
+        validate_by_name = True
 
 @router.post('/search_route')
 async def search_route(data: RouteRequest):
