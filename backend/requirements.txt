@@ -1,4 +1,6 @@
-flask
+fastapi
 requests
 python-dotenv
-flask-cors
+uvicorn
+redis
+pydantic

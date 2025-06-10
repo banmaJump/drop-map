@@ -1,4 +1,4 @@
-// 交通手段モード（日本語）
+// frontend/src/types/route.ts
 export type TransportMode = 'walk' | 'transit';
 
 export interface StepInfo {

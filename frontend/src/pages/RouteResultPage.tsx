@@ -1,3 +1,4 @@
+// frontend/src/pages/RouteResultPage.tsx
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { searchRoute } from '../api/routeApi';

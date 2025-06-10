@@ -1,3 +1,4 @@
+// frontend/src/App.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';

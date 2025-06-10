@@ -1,3 +1,4 @@
+// frontend/src/components/RouteDetail.tsx
 import React from 'react';
 import type { RouteDataForDetail, RouteSegment } from '../types/route';
 import { useTranslation } from 'react-i18next';

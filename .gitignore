@@ -1,3 +1,4 @@
+.env/
 # フロントエンドの無視対象
 /frontend/node_modules/
 frontend/.vscode/
@@ -9,5 +10,4 @@ frontend/.vscode/
 /backend/node_modules/
 /backend/venv/
 /backend/__init___.py/
-backend/.env/
 /backend/.mypy_cache/

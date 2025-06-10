@@ -1,3 +1,4 @@
+// frontend/src/components/HamburgerMenu.tsx
 import React from 'react';
 import './HamburgerMenu.scss';
 
