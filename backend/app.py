@@ -6,13 +6,15 @@ from routes.route_search import router as route_search_router
 from routes.cache import router as cache_router
 from dotenv import load_dotenv
 
-app = FastAPI()
-load_dotenv()
+load_dotenv()  
 
-# CORS設定をここに追加
+app = FastAPI()
+
+frontend_origin = os.getenv("FRONTEND_ORIGIN")
+
 app.add_middleware(
     CORSMiddleware,
-    frontend_origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:3000"), # React開発サーバーのURL（本番なら本番のURLに変更）
+    allow_origins=[frontend_origin, "http://localhost:3000"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
