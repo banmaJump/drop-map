@@ -11,3 +11,6 @@ frontend/.vscode/
 /backend/venv/
 /backend/__init___.py/
 /backend/.mypy_cache/
+
+/drop-map.git/
+/drop-map.git.bfg-report
