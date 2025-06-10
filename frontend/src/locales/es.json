@@ -34,5 +34,9 @@
   "rail": "Ferrocarril",
   "tram": "Tranvía",
   "ferry": "Ferry",
-  "route_duration": "Duración total"
+  "route_duration": "Duración total",
+  "login": "Iniciar sesión",
+  "firstName": "Nombre",
+  "familyName": "Apellido",
+  "loginError": "El nombre no coincide!"
 }

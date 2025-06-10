@@ -34,6 +34,10 @@
     "rail": "Rail",
     "tram": "Tram",
     "ferry": "Ferry",
-    "route_duration": "Total Time"
+    "route_duration": "Total Time",
+    "login": "Login",
+    "firstName": "First Name",
+    "familyName": "Family Name",
+    "loginError": "Name does not match!"
   }
   

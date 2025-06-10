@@ -1,6 +1,4 @@
 # services/route_cache.py
-
-# 検索条件に対するキャッシュを辞書で保持
 from collections import OrderedDict
 from datetime import datetime
 

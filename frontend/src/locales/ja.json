@@ -34,5 +34,9 @@
     "rail": "鉄道",
     "tram": "路面電車",
     "ferry": "フェリー",
-    "unknown": "不明"
+    "unknown": "不明",
+    "login": "ログイン",
+    "firstName": "名",
+    "familyName": "姓",
+    "loginError": "名前が一致しません"
 }
