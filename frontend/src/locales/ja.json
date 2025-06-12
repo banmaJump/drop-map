@@ -13,7 +13,7 @@
     "no_saved_routes": "保存されたルートはありません。",
     "cheapest": "最安",
     "optimal": "最適",
-    "reload_routes": "ルートを再読み込み",
+    "reload_routes": "最新の保存ルートを反映",
     "delete_failed": "ルート削除に失敗しました",
     "no_search": "検索条件がありません",
     "route_saved": "を保存しました",

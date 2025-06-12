@@ -4,7 +4,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.route_search import router as route_search_router
 from routes.cache import router as cache_router
+from routes.warmup import router as warmup_router
 from dotenv import load_dotenv
+
 
 load_dotenv()  
 
@@ -20,5 +22,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(warmup_router, prefix="/api")
 app.include_router(route_search_router, prefix="/api")
 app.include_router(cache_router, prefix="/api")

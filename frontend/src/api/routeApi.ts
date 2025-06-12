@@ -121,7 +121,7 @@ export async function searchRoute(routeRequest: RouteRequest): Promise<RouteResu
   if (filteredStayTimes.length > 0) {
     payload.stay_times = filteredStayTimes;
   }
-
+  
   try {
     const response = await axios.post<ApiResponse>(`${BACKEND_BASE_URL}/search_route`, payload, {
       headers: { 'Content-Type': 'application/json' },

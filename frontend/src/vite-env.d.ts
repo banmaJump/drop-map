@@ -1,9 +1,9 @@
 /// <reference types="vite/client" />
 
-interface ImportMetaEnv {
-    readonly VITE_ALLOWED_NAMES: string;
-  }
+// interface ImportMetaEnv {
+//     readonly VITE_ALLOWED_NAMES: string;
+//   }
   
-  interface ImportMeta {
-    readonly env: ImportMetaEnv;
-  }
+//   interface ImportMeta {
+//     readonly env: ImportMetaEnv;
+//   }

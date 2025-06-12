@@ -5,4 +5,5 @@ router = APIRouter()
 
 @router.get("/warmup")
 async def ping():
+    print("バックサーバーのウォーミングアップ完了")
     return {"status": "ok"}

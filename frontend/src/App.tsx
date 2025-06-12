@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 import LoginPage from './pages/LoginPage';
 import RouteInputPage from './pages/RouteInputPage';
@@ -12,6 +13,14 @@ import SavedRoutesPage from './pages/SavedRoutesPage';
 import HamburgerMenu from './components/HamburgerMenu';
 import Header from './components/Header';
 import Loading from './components/Loading';
+import Footer from './components/Footer';
+
+import BatonPrivacyPage from './components/rules/baton-privacy';
+import Contact from './components/rules/contact';
+import Disclaimer from './components/rules/disclaimer';
+import PrivacyPolicy from './components/rules/privacy-policy';
+import Writers from './components/rules/writers';
+import TermsOfService from './components/rules/terms_of_service';
 
 import './styles/global.scss';
 import './i18n';
@@ -24,7 +33,7 @@ const AUTO_LOGOUT_TIME = 30 * 60 * 1000; // 30分でログアウト
 const App: React.FC = () => {
   const [savedRoutes, setSavedRoutes] = useState<SavedRoute[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showLoadingScreen, setShowLoadingScreen] = useState(false); 
+  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
@@ -111,12 +120,17 @@ const App: React.FC = () => {
     refreshSavedRoutes();
   }, []);
 
+  const isLoggedIn = !!localStorage.getItem('user');
+  if (!isLoggedIn) {
+    return null; 
+  }
+  
   if (loading || showLoadingScreen) {
     return <Loading />;
   }
 
   return (
-    <>
+    <HelmetProvider>
       {localStorage.getItem('user') && (
         <>
           <Header
@@ -140,6 +154,12 @@ const App: React.FC = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<RouteInputPage />} />
         <Route path="/result" element={<RouteResultPage />} />
+        <Route path="/rules/terms_of_service" element={<TermsOfService />} />
+        <Route path="/rules/baton-privacy" element={<BatonPrivacyPage />} />
+        <Route path="/rules/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/rules/disclaimer" element={<Disclaimer />} />
+        <Route path="/rules/writers" element={<Writers />} />
+        <Route path="/rules/contact" element={<Contact />} />
         <Route
           path="/saved"
           element={
@@ -151,7 +171,8 @@ const App: React.FC = () => {
           }
         />
       </Routes>
-    </>
+      <Footer />
+    </HelmetProvider>
   );
 };
 

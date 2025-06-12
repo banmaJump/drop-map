@@ -1,6 +1,6 @@
 // src/pages/RouteInputPage.tsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TimePicker } from 'react-ios-time-picker'; //{TimePicker}必要かも
 import { searchRoute } from '../api/routeApi';
@@ -20,6 +20,12 @@ const RouteInputPage: React.FC = () => {
   const [error, setError] = useState('');
   const { t } = useTranslation();
 
+  useEffect(() => {
+    const isPC = window.innerWidth > 768;
+    if (isPC) {
+      setPoints(['川崎駅', '品川駅']);
+    }
+  }, []);
 
   const handlePointChange = (index: number, value: string) => {
     const newPoints = [...points];
@@ -54,6 +60,7 @@ const RouteInputPage: React.FC = () => {
   };
 
   const handleSubmit = async (e?: React.FormEvent) => {
+    // console.log('🟢 handleSubmit called');
     if (e) e.preventDefault();
 
     const trimmedPoints = points.map(p => p.trim());
@@ -68,7 +75,6 @@ const RouteInputPage: React.FC = () => {
     const destination = filteredPoints[filteredPoints.length - 1];
     const waypoints = filteredPoints.slice(1, -1);
 
-    // 元のpointsにおけるwaypointのindexを取得
     // 元のpointsにおけるwaypointのindexを取得
     const originalWaypointIndices = points
       .map((p, i) => (i !== 0 && i !== points.length - 1 && p.trim() !== '' ? i : -1))
@@ -90,6 +96,8 @@ const RouteInputPage: React.FC = () => {
       departureTime: departureISO,
       stayTimes: stayList,
     };
+
+    // console.log('🟢 RouteRequest:', reqData);
 
     setIsSearching(true);
 
