@@ -25,33 +25,31 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
+    flex-wrap: nowrap; /* 折り返し禁止 */
   }
   
   .route-input__input {
-    flex: 1;
+    flex: 1 1 auto; /* 基本は伸縮する */
+    min-width: 0; /* はみ出し防止 */
     padding: 0.6rem;
     border: 1px solid #ccc;
     border-radius: 0.4rem;
-    font-size: 16px;
   }
   
   .route-input__stay-time {
-    width: 100px;
+    width: 100%; /* 少し狭めに */
     padding: 0.6rem;
+    flex-shrink: 0; /* 縮まらない */
   }
-
+  
   .duration-div {
     position: relative;
     display: flex;
     align-items: center;
     border: 1px solid #ccc;
     border-radius: 0.4rem;
-    
-    span{
-      position: absolute;
-      right: 10px;
-      font-size: 15px;
-    }
+    flex-shrink: 0; /* 縮まらない */
+    width: 100px; /* 明示的に幅指定 */
   }
   
   .route-input__remove-btn {
@@ -61,7 +59,10 @@
     border: none;
     border-radius: 0.4rem;
     cursor: pointer;
-  }
+    flex-shrink: 0; /* これが重要。縮まらずにちゃんと表示 */
+    min-width: 70px; /* ボタンの最小幅を指定 */
+    white-space: nowrap; /* テキストの折り返し防止 */
+  }  
   
   .route-input__add-btn {
     display: block;

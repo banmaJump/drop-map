@@ -121,8 +121,8 @@ const App: React.FC = () => {
   }, []);
 
   const isLoggedIn = !!localStorage.getItem('user');
-  if (!isLoggedIn) {
-    return null; 
+  if (!isLoggedIn && location.pathname !== '/login') {
+    navigate('/login');
   }
   
   if (loading || showLoadingScreen) {

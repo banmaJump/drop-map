@@ -52,7 +52,7 @@ const RouteDetail: React.FC<RouteDetailProps & { className?: string }> = ({ rout
           const mode = seg.mode?.toLowerCase() ?? 'unknown';
           const icon = mode === 'walking' ? '🚶' : mode === 'transit' ? '🚆' : '➡️';
 
-          
+
 
           const stayDuration =
             seg.stayDuration !== undefined ? `${Math.ceil(seg.stayDuration / 60)}${t('minutes')}` : `--${t('minutes')}`;
@@ -66,14 +66,15 @@ const RouteDetail: React.FC<RouteDetailProps & { className?: string }> = ({ rout
             if (isNaN(h) || isNaN(m)) return null;
             return h * 60 + m;
           }
-          
+
           const depMin = parseTimeToMinutes(departureTime);
           const arrMin = parseTimeToMinutes(arrivalTime);
-          
+
           const durationMin =
-            depMin !== null && arrMin !== null && arrMin >= depMin
-              ? `${arrMin - depMin}${t('minutes')}`
+            depMin !== null && arrMin !== null
+              ? `${arrMin >= depMin ? arrMin - depMin : arrMin + 1440 - depMin}${t('minutes')}`
               : `--${t('minutes')}`;
+
           return (
             <React.Fragment key={seg.id ?? index}>
               <div className="segment-item">
