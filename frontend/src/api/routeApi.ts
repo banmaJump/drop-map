@@ -2,6 +2,7 @@
 import axios from 'axios';
 import type { RouteRequest, RouteResult, RouteDataWithTime, RouteSegment, TransportMode } from '../types/route';
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL || '';
+import i18n from '../i18n';
 
 // バックエンドAPIレスポンスの型定義
 interface ApiSegment {
@@ -110,6 +111,7 @@ export async function searchRoute(routeRequest: RouteRequest): Promise<RouteResu
     origin,
     destination,
     waypoints: filteredWaypoints,
+    language: i18n.language || 'ja',
   };
 
   // 出発時刻がある場合はISO8601形式で送る想定（タイムゾーン付きが望ましい）

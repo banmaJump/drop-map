@@ -16,7 +16,8 @@ def call_directions_api(
     destination: str,
     waypoints: List[str],
     mode: str,
-    departure_time: Optional[str]
+    departure_time: Optional[str],
+    language: str,
 ) -> Optional[dict]:
     cached = get_from_cache(origin, destination, waypoints)
     if cached:
@@ -48,12 +49,13 @@ def call_directions_api(
         "key": GOOGLE_MAPS_API_KEY,
         "mode": mode,
         "departure_time": departure_timestamp,
-        "language": "ja",
+        "language": language,
     }
     if waypoints:
         params["waypoints"] = "|".join(waypoints)
 
     response = requests.get(DIRECTIONS_API_URL, params=params)
+    print("Request URL:", response.url)
     if response.status_code != 200:
         print(f"DirectionAPIへの送信エラー: {response.status_code}")
         return None
@@ -167,8 +169,25 @@ def get_segments(
 def generate_route_name(origin: str, waypoints: List[str], destination: str) -> str:
     return " → ".join([origin] + waypoints + [destination])
 
+import re
+
+def contains_japanese(text: str) -> bool:
+    # 漢字、ひらがな、カタカナのUnicode範囲で判定
+    return bool(re.search(r'[\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]', text))
+
 def extract_last_place_name(address: str) -> str:
-    return address.strip().split()[-1] if address else "そんな場所知らん。"
+    if not address:
+        return "そんな場所知らん。"
+    
+    parts = address.strip().split()
+
+    if contains_japanese(address):
+        # 日本語住所 → 最後の単語を返す
+        return parts[-1]
+    else:
+        # 日本語以外 → 最初の2単語を返す（単語が1つならそれだけ）
+        return " ".join(parts[:3]) if len(parts) >= 2 else parts[0]
+
 
 def build_combined_route(
     origin: str,
@@ -199,17 +218,18 @@ def get_best_and_cheapest_routes(
     destination: str,
     waypoints: List[str],
     departure_time: Optional[str],
-    stay_times: Optional[List[int]] = None
+    stay_times: Optional[List[int]] = None,
+    language: str = "ja",
 ) -> Dict[str, Any]:
     stay_times = stay_times or []
 
     # transitモードはwaypointsがちょうど2つのときだけ利用（API仕様に合わせる）
     if len(waypoints) == 2:
-        transit_data = call_directions_api(origin, destination, waypoints, "transit", departure_time)
+        transit_data = call_directions_api(origin, destination, waypoints, "transit", departure_time, language)
     else:
         transit_data = None
 
-    walking_data = call_directions_api(origin, destination, waypoints, "walking", departure_time)
+    walking_data = call_directions_api(origin, destination, waypoints, "walking", departure_time, language)
 
     # transitデータがなければwalkingデータで代替
     if not transit_data:

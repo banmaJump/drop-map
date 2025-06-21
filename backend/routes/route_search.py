@@ -13,9 +13,11 @@ class RouteRequest(BaseModel):
     waypoints: List[str] = []
     departureTime: Optional[str] = Field(None, alias="departure_time")
     stayTimes: Optional[List[int]] = Field(None, alias="stay_times")
+    language: str
 
     class Config:
-        validate_by_name = True
+        allow_population_by_field_name = True
+
 
 @router.post('/search_route')
 async def search_route(data: RouteRequest):
@@ -24,6 +26,7 @@ async def search_route(data: RouteRequest):
     waypoints = data.waypoints
     departure_time = data.departureTime
     stay_times = data.stayTimes
+    language = data.language
 
     print("フロントから受信したリクエスト:", data)
 
@@ -51,7 +54,8 @@ async def search_route(data: RouteRequest):
             destination,
             waypoints,
             departure_time=departure_time,
-            stay_times=stay_times or []
+            stay_times=stay_times or [],
+            language=language
         )
 
         # 確認済み。問題なく動くのでコメントアウトした。
